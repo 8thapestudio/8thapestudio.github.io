@@ -15,9 +15,25 @@ body {
   font-family:'Orbitron', sans-serif;
   background:black;
   color:white;
-  text-align:center;
+  overflow-x:hidden;
 }
 
+/* BACKGROUND ANIMATION */
+.bg {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at center, #001111, black 70%);
+  z-index:-1;
+  animation: pulse 6s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity:0.7; }
+  100% { opacity:1; }
+}
+
+/* HERO */
 .hero {
   height:100vh;
   display:flex;
@@ -26,10 +42,21 @@ body {
   align-items:center;
 }
 
+/* GLITCH TITLE */
 h1 {
   font-size:3rem;
-  letter-spacing:2px;
+  color:#00f0ff;
+  position:relative;
   text-shadow:0 0 10px #00f0ff;
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow:2px 0 red, -2px 0 blue; }
+  20% { text-shadow:-2px 0 red, 2px 0 blue; }
+  40% { text-shadow:2px 2px red, -2px -2px blue; }
+  60% { text-shadow:0 0 #00f0ff; }
+  100% { text-shadow:0 0 10px #00f0ff; }
 }
 
 p {
@@ -37,6 +64,7 @@ p {
   margin:20px 0;
 }
 
+/* BUTTONS */
 .buttons {
   margin-top:20px;
 }
@@ -54,14 +82,18 @@ p {
 .btn:hover {
   background:#00f0ff;
   color:black;
-  box-shadow:0 0 15px #00f0ff;
+  box-shadow:0 0 20px #00f0ff;
+}
+
+/* SECTION */
+.section {
+  padding:100px 20px;
+  text-align:center;
 }
 
 .footer {
-  position:absolute;
-  bottom:20px;
-  width:100%;
-  font-size:12px;
+  text-align:center;
+  padding:20px;
   opacity:0.5;
 }
 </style>
@@ -69,15 +101,32 @@ p {
 
 <body>
 
+<div class="bg"></div>
+
 <div class="hero">
   <h1>8th Ape Studio</h1>
   <p>AI Music · Visual Experiments · Digital Identity</p>
 
   <div class="buttons">
-    <a href="#" class="btn">Listen</a>
-    <a href="#" class="btn">Projects</a>
-    <a href="#" class="btn">Contact</a>
+    <a href="#music" class="btn">Listen</a>
+    <a href="#projects" class="btn">Projects</a>
+    <a href="#contact" class="btn">Contact</a>
   </div>
+</div>
+
+<div id="music" class="section">
+  <h2>Music</h2>
+  <p>Latest releases coming soon</p>
+</div>
+
+<div id="projects" class="section">
+  <h2>Projects</h2>
+  <p>AI video · experimental visuals · digital art</p>
+</div>
+
+<div id="contact" class="section">
+  <h2>Contact</h2>
+  <p>8thApe-Sound@proton.me</p>
 </div>
 
 <div class="footer">
