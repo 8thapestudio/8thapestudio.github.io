@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>8th Ape Studio | AI Music & Visual Experience</title>
-<meta name="description" content="8th Ape Studio creates experimental music, AI visuals and digital experiences.">
+<title>8th Ape Studio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
@@ -16,9 +15,10 @@ body {
   color:white;
   background:black;
   text-align:center;
+  overflow-x:hidden;
 }
 
-/* LANGUAGE SWITCH */
+/* LANGUAGE */
 .lang-switch {
   position:fixed;
   top:15px;
@@ -35,19 +35,36 @@ body {
   cursor:pointer;
 }
 
-/* BACKGROUND IMAGE */
+/* HERO WRAPPER */
+.hero {
+  position:relative;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  padding-bottom:12vh;
+}
+
+/* BUBBLE */
 .bg-image {
-  position:fixed;
-  top:50%;
+  position:absolute;
+  top:35%;
   left:50%;
   transform:translate(-50%, -50%);
   width:60vw;
   max-width:700px;
-  opacity:0.9;
+  opacity:0.85;
   pointer-events:none;
-  filter: drop-shadow(0 0 30px #00f0ff);
-  animation: pulse 6s ease-in-out infinite;
-  z-index:-2;
+  animation: float 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px #00f0ff);
+  z-index:-1;
+}
+
+/* FLOAT */
+@keyframes float {
+  0%,100% { transform:translate(-50%, -50%) scale(1); }
+  50% { transform:translate(-50%, -53%) scale(1.03); }
 }
 
 /* OVERLAY */
@@ -55,28 +72,25 @@ body {
   position:fixed;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.5);
-  backdrop-filter: blur(3px);
-  z-index:-1;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity:0.85; }
-  50% { opacity:1; }
-}
-
-/* HERO */
-.hero {
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index:-2;
 }
 
 /* TITLE */
 h1 {
-  text-shadow: 0 0 15px #00f0ff, 0 0 30px rgba(0,240,255,0.4);
+  font-size:3rem;
+  opacity:0;
+  animation: fadeIn 1.5s ease forwards;
+  text-shadow:0 0 20px #00f0ff;
+}
+
+@keyframes fadeIn {
+  to { opacity:1; }
+}
+
+p {
+  opacity:0.7;
 }
 
 /* BUTTONS */
@@ -91,14 +105,16 @@ h1 {
 }
 
 .btn:hover {
+  transform: translateY(-3px) scale(1.05);
   background:#00f0ff;
   color:black;
-  box-shadow:0 0 20px #00f0ff;
+  box-shadow:0 0 30px #00f0ff;
 }
 
 /* SECTIONS */
 .section {
   padding:100px 20px;
+  background:black;
 }
 
 /* MERCH */
@@ -112,11 +128,12 @@ h1 {
 
 .item {
   border:1px solid #00f0ff;
-  padding:30px 10px;
+  padding:30px;
   transition:0.3s;
 }
 
 .item:hover {
+  transform:scale(1.05);
   background:#00f0ff;
   color:black;
 }
@@ -131,19 +148,18 @@ h1 {
 
 <body>
 
-<!-- LANGUAGE SWITCH -->
 <div class="lang-switch">
   <button onclick="setLang('en')">EN</button>
   <button onclick="setLang('cz')">CZ</button>
   <button onclick="setLang('de')">DE</button>
 </div>
 
-<!-- BACKGROUND -->
-<img src="bg.png" class="bg-image">
 <div class="overlay"></div>
 
 <!-- HERO -->
 <div class="hero">
+  <img src="bg.png" class="bg-image">
+
   <h1>8th Ape Studio</h1>
   <p id="tagline"></p>
 
@@ -214,7 +230,7 @@ const content = {
     musicTitle: "Hudba",
     musicText: "Nové skladby brzy",
     projTitle: "Projekty",
-    projText: "AI video · experimentální vizuály · digitální tvorba",
+    projText: "AI video · experimentální vizuály",
     merchText: "koncept · již brzy",
     contactTitle: "Kontakt"
   },
@@ -227,7 +243,7 @@ const content = {
     musicTitle: "Musik",
     musicText: "Neue Releases bald verfügbar",
     projTitle: "Projekte",
-    projText: "AI Video · visuelle Experimente · digitale Kunst",
+    projText: "AI Video · visuelle Experimente",
     merchText: "Konzept · bald verfügbar",
     contactTitle: "Kontakt"
   }
@@ -247,7 +263,6 @@ function setLang(lang) {
   document.getElementById("contactTitle").innerText = content[lang].contactTitle;
 }
 
-// default language
 setLang('en');
 </script>
 
