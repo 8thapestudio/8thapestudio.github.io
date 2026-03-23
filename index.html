@@ -15,7 +15,6 @@ body {
   color:white;
   background:black;
   text-align:center;
-  overflow-x:hidden;
 }
 
 /* LANGUAGE */
@@ -23,7 +22,6 @@ body {
   position:fixed;
   top:15px;
   right:20px;
-  z-index:10;
 }
 
 .lang-switch button {
@@ -33,9 +31,16 @@ body {
   margin:2px;
   padding:5px 10px;
   cursor:pointer;
+  opacity:0.5;
 }
 
-/* HERO WRAPPER */
+.lang-switch button.active {
+  background:#00f0ff;
+  color:black;
+  opacity:1;
+}
+
+/* HERO */
 .hero {
   position:relative;
   height:100vh;
@@ -55,42 +60,19 @@ body {
   width:60vw;
   max-width:700px;
   opacity:0.85;
-  pointer-events:none;
   animation: float 8s ease-in-out infinite;
   filter: drop-shadow(0 0 40px #00f0ff);
   z-index:-1;
 }
 
-/* FLOAT */
 @keyframes float {
   0%,100% { transform:translate(-50%, -50%) scale(1); }
   50% { transform:translate(-50%, -53%) scale(1.03); }
 }
 
-/* OVERLAY */
-.overlay {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter: blur(4px);
-  z-index:-2;
-}
-
 /* TITLE */
 h1 {
-  font-size:3rem;
-  opacity:0;
-  animation: fadeIn 1.5s ease forwards;
   text-shadow:0 0 20px #00f0ff;
-}
-
-@keyframes fadeIn {
-  to { opacity:1; }
-}
-
-p {
-  opacity:0.7;
 }
 
 /* BUTTONS */
@@ -101,41 +83,41 @@ p {
   border:1px solid #00f0ff;
   color:#00f0ff;
   text-decoration:none;
-  transition:0.3s;
 }
 
 .btn:hover {
-  transform: translateY(-3px) scale(1.05);
   background:#00f0ff;
   color:black;
-  box-shadow:0 0 30px #00f0ff;
 }
 
 /* SECTIONS */
 .section {
   padding:100px 20px;
-  background:black;
 }
 
 /* MERCH */
 .merch-grid {
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap:20px;
-  max-width:600px;
+  max-width:800px;
   margin:40px auto;
 }
 
-.item {
+.item img {
+  width:100%;
   border:1px solid #00f0ff;
-  padding:30px;
   transition:0.3s;
 }
 
-.item:hover {
+.item:hover img {
   transform:scale(1.05);
-  background:#00f0ff;
-  color:black;
+  box-shadow:0 0 30px #00f0ff;
+}
+
+.item p {
+  margin-top:10px;
+  font-size:14px;
 }
 
 /* FOOTER */
@@ -149,14 +131,11 @@ p {
 <body>
 
 <div class="lang-switch">
-  <button onclick="setLang('en')">EN</button>
-  <button onclick="setLang('cz')">CZ</button>
-  <button onclick="setLang('de')">DE</button>
+  <button id="enBtn" onclick="setLang('en')">EN</button>
+  <button id="czBtn" onclick="setLang('cz')">CZ</button>
+  <button id="deBtn" onclick="setLang('de')">DE</button>
 </div>
 
-<div class="overlay"></div>
-
-<!-- HERO -->
 <div class="hero">
   <img src="bg.png" class="bg-image">
 
@@ -171,32 +150,40 @@ p {
   </div>
 </div>
 
-<!-- MUSIC -->
 <div id="music" class="section">
   <h2 id="musicTitle"></h2>
   <p id="musicText"></p>
 </div>
 
-<!-- PROJECTS -->
 <div id="projects" class="section">
   <h2 id="projTitle"></h2>
   <p id="projText"></p>
 </div>
 
-<!-- MERCH -->
 <div id="merch" class="section">
   <h2>MERCH / DROP</h2>
   <p id="merchText"></p>
 
   <div class="merch-grid">
-    <div class="item">DROP_01</div>
-    <div class="item">DROP_02</div>
-    <div class="item">DROP_03</div>
-    <div class="item">DROP_04</div>
+    <div class="item">
+      <img src="https://via.placeholder.com/300x300/000000/00f0ff?text=DROP_01">
+      <p>DROP_01</p>
+    </div>
+    <div class="item">
+      <img src="https://via.placeholder.com/300x300/000000/00f0ff?text=DROP_02">
+      <p>DROP_02</p>
+    </div>
+    <div class="item">
+      <img src="https://via.placeholder.com/300x300/000000/00f0ff?text=DROP_03">
+      <p>DROP_03</p>
+    </div>
+    <div class="item">
+      <img src="https://via.placeholder.com/300x300/000000/00f0ff?text=DROP_04">
+      <p>DROP_04</p>
+    </div>
   </div>
 </div>
 
-<!-- CONTACT -->
 <div id="contact" class="section">
   <h2 id="contactTitle"></h2>
   <p>8thApe-Sound@proton.me</p>
@@ -217,34 +204,34 @@ const content = {
     musicTitle: "Music",
     musicText: "Latest releases coming soon",
     projTitle: "Projects",
-    projText: "AI video · experimental visuals · digital art",
+    projText: "AI video · experimental visuals",
     merchText: "concept pieces · coming soon",
     contactTitle: "Contact"
   },
   cz: {
-    tagline: "AI hudba · vizuální experimenty · digitální identita",
+    tagline: "AI hudba · vizuální experimenty",
     btn1: "Hudba",
     btn2: "Projekty",
     btn3: "Merch",
     btn4: "Kontakt",
     musicTitle: "Hudba",
-    musicText: "Nové skladby brzy",
+    musicText: "Brzy nové skladby",
     projTitle: "Projekty",
-    projText: "AI video · experimentální vizuály",
-    merchText: "koncept · již brzy",
+    projText: "AI video · vizuální tvorba",
+    merchText: "koncept · brzy",
     contactTitle: "Kontakt"
   },
   de: {
-    tagline: "AI Musik · visuelle Experimente · digitale Identität",
+    tagline: "AI Musik · visuelle Experimente",
     btn1: "Musik",
     btn2: "Projekte",
     btn3: "Merch",
     btn4: "Kontakt",
     musicTitle: "Musik",
-    musicText: "Neue Releases bald verfügbar",
+    musicText: "Neue Releases bald",
     projTitle: "Projekte",
     projText: "AI Video · visuelle Experimente",
-    merchText: "Konzept · bald verfügbar",
+    merchText: "Konzept · bald",
     contactTitle: "Kontakt"
   }
 };
@@ -261,6 +248,12 @@ function setLang(lang) {
   document.getElementById("projText").innerText = content[lang].projText;
   document.getElementById("merchText").innerText = content[lang].merchText;
   document.getElementById("contactTitle").innerText = content[lang].contactTitle;
+
+  document.getElementById("enBtn").classList.remove("active");
+  document.getElementById("czBtn").classList.remove("active");
+  document.getElementById("deBtn").classList.remove("active");
+
+  document.getElementById(lang + "Btn").classList.add("active");
 }
 
 setLang('en');
