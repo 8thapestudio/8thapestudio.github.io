@@ -150,7 +150,7 @@ body {
 
 <div class="hero" id="hero">
 
-  <img src="bg.png" class="bg-image" id="img">
+  <img src="bg.png" class="bg-image">
 
   <h1 class="title">
     <span id="titleText">8th Ape Studio</span>
@@ -164,6 +164,7 @@ body {
     <a href="#merch" class="btn" id="btn3"></a>
     <a href="#contact" class="btn" id="btn4"></a>
   </div>
+
 </div>
 
 <div class="section" id="music">
@@ -175,31 +176,27 @@ body {
 
 <script>
 const hero = document.getElementById("hero");
-const img = document.getElementById("img");
 const titleText = document.getElementById("titleText");
 
 function isInsideReducedZone(e) {
   const rect = titleText.getBoundingClientRect();
-  const shrink = rect.width * 0.05; // 5% zleva i zprava
+  const shrink = rect.width * 0.05;
 
   return (
     e.clientX > rect.left + shrink &&
-    e.clientX < rect.right - shrink
+    e.clientX < rect.right - shrink &&
+    e.clientY > rect.top - 200 && // rozšíření nahoru (bublina)
+    e.clientY < rect.bottom + 200 // dolů
   );
 }
 
-function activate(e) {
+document.addEventListener("mousemove", (e) => {
   if (isInsideReducedZone(e)) {
     hero.classList.add("active");
+  } else {
+    hero.classList.remove("active");
   }
-}
-
-function deactivate() {
-  hero.classList.remove("active");
-}
-
-document.addEventListener("mousemove", activate);
-document.addEventListener("mouseleave", deactivate);
+});
 
 /* LANGUAGE */
 const content = {
