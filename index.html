@@ -79,16 +79,17 @@ h1 {
   transition:0.4s;
 }
 
-/* TAGLINE (hidden by default) */
+/* TAGLINE (true hidden state) */
 .tagline {
   opacity:0;
-  transform:translateY(-10px);
-  transition:0.4s;
+  transform:translateY(-20px);
+  transition:0.4s ease;
+  margin-top:-10px;
 }
 
 /* BUTTONS */
 .buttons {
-  transition:0.4s;
+  transition:0.4s ease;
 }
 
 .btn {
@@ -107,14 +108,15 @@ h1 {
   box-shadow:0 0 25px #00f0ff;
 }
 
-/* HOVER INTERACTION */
+/* === INTERACTION (FIXED) === */
+
 .hero:hover .tagline {
   opacity:1;
   transform:translateY(10px);
 }
 
 .hero:hover .buttons {
-  transform:translateY(10px);
+  transform:translateY(15px);
 }
 
 .hero:hover h1 {
@@ -122,7 +124,7 @@ h1 {
 }
 
 .hero:hover .bg-image {
-  filter: drop-shadow(0 0 60px #00f0ff);
+  filter: drop-shadow(0 0 70px #00f0ff);
 }
 
 /* SECTIONS */
@@ -193,22 +195,10 @@ h1 {
   <p id="merchText"></p>
 
   <div class="merch-grid">
-    <div class="item">
-      <img src="bg.png">
-      <p>DROP_01</p>
-    </div>
-    <div class="item">
-      <img src="bg.png">
-      <p>DROP_02</p>
-    </div>
-    <div class="item">
-      <img src="bg.png">
-      <p>DROP_03</p>
-    </div>
-    <div class="item">
-      <img src="bg.png">
-      <p>DROP_04</p>
-    </div>
+    <div class="item"><img src="bg.png"><p>DROP_01</p></div>
+    <div class="item"><img src="bg.png"><p>DROP_02</p></div>
+    <div class="item"><img src="bg.png"><p>DROP_03</p></div>
+    <div class="item"><img src="bg.png"><p>DROP_04</p></div>
   </div>
 </div>
 
