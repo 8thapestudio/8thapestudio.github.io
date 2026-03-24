@@ -100,13 +100,11 @@ body {
   border:1px solid #00f0ff;
   color:#00f0ff;
   text-decoration:none;
-  transition:0.3s;
 }
 
 .btn:hover {
   background:#00f0ff;
   color:black;
-  box-shadow:0 0 25px #00f0ff;
 }
 
 /* ACTIVE */
@@ -133,6 +131,20 @@ body {
   padding:100px 20px;
 }
 
+/* MERCH GRID */
+.merch-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap:20px;
+  max-width:800px;
+  margin:40px auto;
+}
+
+.item img {
+  width:100%;
+  border:1px solid #00f0ff;
+}
+
 .footer {
   padding:20px;
   opacity:0.5;
@@ -151,7 +163,6 @@ body {
 </div>
 
 <div class="hero" id="hero">
-
   <img src="bg.png" class="bg-image" id="img">
 
   <h1 class="title">
@@ -166,12 +177,37 @@ body {
     <a href="#merch" class="btn" id="btn3"></a>
     <a href="#contact" class="btn" id="btn4"></a>
   </div>
-
 </div>
 
-<div class="section" id="music">
+<!-- MUSIC -->
+<div id="music" class="section">
   <h2 id="musicTitle"></h2>
   <p id="musicText"></p>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" class="section">
+  <h2 id="projTitle"></h2>
+  <p id="projText"></p>
+</div>
+
+<!-- MERCH -->
+<div id="merch" class="section">
+  <h2>MERCH / DROP</h2>
+  <p id="merchText"></p>
+
+  <div class="merch-grid">
+    <div class="item"><img src="bg.png"><p>DROP_01</p></div>
+    <div class="item"><img src="bg.png"><p>DROP_02</p></div>
+    <div class="item"><img src="bg.png"><p>DROP_03</p></div>
+    <div class="item"><img src="bg.png"><p>DROP_04</p></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <h2 id="contactTitle"></h2>
+  <p>8thApe-Sound@proton.me</p>
 </div>
 
 <div class="footer">© 8th Ape Studio</div>
@@ -202,7 +238,7 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-/* LANGUAGE CONTENT */
+/* LANGUAGE */
 const content = {
   en: {
     tagline: "AI Music · Visual Experiments · Digital Identity",
@@ -211,7 +247,11 @@ const content = {
     btn3: "Merch",
     btn4: "Contact",
     musicTitle: "Music",
-    musicText: "Latest releases coming soon"
+    musicText: "Latest releases coming soon",
+    projTitle: "Projects",
+    projText: "AI video · experimental visuals",
+    merchText: "concept drops · coming soon",
+    contactTitle: "Contact"
   },
   cz: {
     tagline: "AI hudba · vizuální experimenty · digitální identita",
@@ -220,7 +260,11 @@ const content = {
     btn3: "Merch",
     btn4: "Kontakt",
     musicTitle: "Hudba",
-    musicText: "Nové skladby brzy"
+    musicText: "Nové skladby brzy",
+    projTitle: "Projekty",
+    projText: "AI video · vizuální tvorba",
+    merchText: "koncept · brzy",
+    contactTitle: "Kontakt"
   },
   de: {
     tagline: "AI Musik · visuelle Experimente · digitale Identität",
@@ -229,7 +273,11 @@ const content = {
     btn3: "Merch",
     btn4: "Kontakt",
     musicTitle: "Musik",
-    musicText: "Neue Releases bald"
+    musicText: "Neue Releases bald",
+    projTitle: "Projekte",
+    projText: "AI Video · visuelle Experimente",
+    merchText: "Konzept · bald",
+    contactTitle: "Kontakt"
   },
   fr: {
     tagline: "Musique IA · Expériences visuelles · Identité numérique",
@@ -238,7 +286,11 @@ const content = {
     btn3: "Merch",
     btn4: "Contact",
     musicTitle: "Musique",
-    musicText: "Nouvelles sorties bientôt"
+    musicText: "Nouvelles sorties bientôt",
+    projTitle: "Projets",
+    projText: "Vidéo IA · visuels expérimentaux",
+    merchText: "drops concept · bientôt",
+    contactTitle: "Contact"
   },
   it: {
     tagline: "Musica AI · Esperimenti visivi · Identità digitale",
@@ -247,7 +299,11 @@ const content = {
     btn3: "Merch",
     btn4: "Contatto",
     musicTitle: "Musica",
-    musicText: "Nuove uscite in arrivo"
+    musicText: "Nuove uscite in arrivo",
+    projTitle: "Progetti",
+    projText: "Video AI · visivi sperimentali",
+    merchText: "concept · presto",
+    contactTitle: "Contatto"
   }
 };
 
@@ -259,6 +315,10 @@ function setLang(lang) {
   document.getElementById("btn4").innerText = content[lang].btn4;
   document.getElementById("musicTitle").innerText = content[lang].musicTitle;
   document.getElementById("musicText").innerText = content[lang].musicText;
+  document.getElementById("projTitle").innerText = content[lang].projTitle;
+  document.getElementById("projText").innerText = content[lang].projText;
+  document.getElementById("merchText").innerText = content[lang].merchText;
+  document.getElementById("contactTitle").innerText = content[lang].contactTitle;
 
   document.querySelectorAll(".lang-switch button").forEach(btn => btn.classList.remove("active"));
   document.getElementById(lang + "Btn").classList.add("active");
