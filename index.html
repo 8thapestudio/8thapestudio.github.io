@@ -1,21 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>8th Ape Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Orbitron', sans-serif;
+  color:white;
+  background:black;
+  text-align:center;
+}
+
+/* LANGUAGE */
+.lang-switch {
+  position:fixed;
+  top:15px;
+  right:20px;
+  z-index:10;
+}
+
+.lang-switch button {
+  border:1px solid #00f0ff;
+  background:none;
+  color:#00f0ff;
+  margin:2px;
+  padding:6px 12px;
+  cursor:pointer;
+  opacity:0.5;
+}
+
+.lang-switch button.active {
+  background:#00f0ff;
+  color:black;
+  opacity:1;
+}
+
+/* HERO */
+.hero {
+  position:relative;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  padding-bottom:12vh;
+}
+
+/* BUBBLE */
+.bg-image {
+  position:absolute;
+  top:32%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:60vw;
+  max-width:700px;
+  opacity:0.9;
+  animation: float 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px #00f0ff);
+  transition:0.5s ease;
+  z-index:1;
+}
+
+@keyframes float {
+  0%,100% { transform:translate(-50%, -50%) scale(1); }
+  50% { transform:translate(-50%, -54%) scale(1.03); }
+}
+
+/* TITLE */
+.title span {
+  font-size:3.5rem;
+  text-shadow:0 0 25px #00f0ff;
+  display:inline-block;
+  transition:0.5s ease;
+}
+
+/* TAGLINE */
+.tagline {
+  opacity:0;
+  transform:translateY(-40px);
+  transition:0.5s ease;
+  font-size:1.2rem;
+}
+
+/* BUTTONS */
+.buttons {
+  transition:0.5s ease;
+}
+
+.btn {
+  display:inline-block;
+  margin:10px;
+  padding:12px 24px;
+  border:1px solid #00f0ff;
+  color:#00f0ff;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.btn:hover {
+  background:#00f0ff;
+  color:black;
+  box-shadow:0 0 25px #00f0ff;
+}
+
+/* ACTIVE */
+.hero.active .tagline {
+  opacity:1;
+  transform:translateY(-5px);
+}
+
+.hero.active .buttons {
+  transform:translateY(25px);
+}
+
+.hero.active .title span {
+  text-shadow:0 0 50px #00f0ff;
+}
+
+.hero.active .bg-image {
+  transform:translate(-50%, -55%) scale(1.06);
+  filter: drop-shadow(0 0 90px #00f0ff);
+}
+
+/* SECTIONS */
+.section {
+  padding:100px 20px;
+}
+
+.footer {
+  padding:20px;
+  opacity:0.5;
+}
+</style>
+</head>
+
+<body>
+
 <div class="lang-switch">
-  <button id="enBtn" onclick="setLang('en')">
-    <img src="https://flagcdn.com/w40/gb.png">
-  </button>
-
-  <button id="czBtn" onclick="setLang('cz')">
-    <img src="https://flagcdn.com/w40/cz.png">
-  </button>
-
-  <button id="deBtn" onclick="setLang('de')">
-    <img src="https://flagcdn.com/w40/de.png">
-  </button>
-
-  <button id="arBtn" onclick="setLang('ar')">
-    <img src="https://flagcdn.com/w40/sa.png">
-  </button>
-
-  <button id="hiBtn" onclick="setLang('hi')">
-    <img src="https://flagcdn.com/w40/in.png">
-  </button>
+  <button id="enBtn" onclick="setLang('en')">EN</button>
+  <button id="czBtn" onclick="setLang('cz')">CZ</button>
+  <button id="deBtn" onclick="setLang('de')">DE</button>
+  <button id="frBtn" onclick="setLang('fr')">FR</button>
+  <button id="itBtn" onclick="setLang('it')">IT</button>
 </div>
+
+<div class="hero" id="hero">
+
+  <img src="bg.png" class="bg-image" id="img">
+
+  <h1 class="title">
+    <span id="titleText">8th Ape Studio</span>
+  </h1>
+
+  <p id="tagline" class="tagline"></p>
+
+  <div class="buttons">
+    <a href="#music" class="btn" id="btn1"></a>
+    <a href="#projects" class="btn" id="btn2"></a>
+    <a href="#merch" class="btn" id="btn3"></a>
+    <a href="#contact" class="btn" id="btn4"></a>
+  </div>
+
+</div>
+
+<div class="section" id="music">
+  <h2 id="musicTitle"></h2>
+  <p id="musicText"></p>
+</div>
+
+<div class="footer">© 8th Ape Studio</div>
+
+<script>
+const hero = document.getElementById("hero");
+const titleText = document.getElementById("titleText");
+const img = document.getElementById("img");
+
+function isInsideReducedZone(e) {
+  const rect = titleText.getBoundingClientRect();
+  const imgRect = img.getBoundingClientRect();
+  const shrink = rect.width * 0.05;
+
+  return (
+    e.clientX > rect.left + shrink &&
+    e.clientX < rect.right - shrink &&
+    e.clientY > imgRect.top &&
+    e.clientY < rect.bottom + 200
+  );
+}
+
+document.addEventListener("mousemove", (e) => {
+  if (isInsideReducedZone(e)) {
+    hero.classList.add("active");
+  } else {
+    hero.classList.remove("active");
+  }
+});
+
+/* LANGUAGE CONTENT */
+const content = {
+  en: {
+    tagline: "AI Music · Visual Experiments · Digital Identity",
+    btn1: "Listen",
+    btn2: "Projects",
+    btn3: "Merch",
+    btn4: "Contact",
+    musicTitle: "Music",
+    musicText: "Latest releases coming soon"
+  },
+  cz: {
+    tagline: "AI hudba · vizuální experimenty · digitální identita",
+    btn1: "Hudba",
+    btn2: "Projekty",
+    btn3: "Merch",
+    btn4: "Kontakt",
+    musicTitle: "Hudba",
+    musicText: "Nové skladby brzy"
+  },
+  de: {
+    tagline: "AI Musik · visuelle Experimente · digitale Identität",
+    btn1: "Musik",
+    btn2: "Projekte",
+    btn3: "Merch",
+    btn4: "Kontakt",
+    musicTitle: "Musik",
+    musicText: "Neue Releases bald"
+  },
+  fr: {
+    tagline: "Musique IA · Expériences visuelles · Identité numérique",
+    btn1: "Écouter",
+    btn2: "Projets",
+    btn3: "Merch",
+    btn4: "Contact",
+    musicTitle: "Musique",
+    musicText: "Nouvelles sorties bientôt"
+  },
+  it: {
+    tagline: "Musica AI · Esperimenti visivi · Identità digitale",
+    btn1: "Ascolta",
+    btn2: "Progetti",
+    btn3: "Merch",
+    btn4: "Contatto",
+    musicTitle: "Musica",
+    musicText: "Nuove uscite in arrivo"
+  }
+};
+
+function setLang(lang) {
+  document.getElementById("tagline").innerText = content[lang].tagline;
+  document.getElementById("btn1").innerText = content[lang].btn1;
+  document.getElementById("btn2").innerText = content[lang].btn2;
+  document.getElementById("btn3").innerText = content[lang].btn3;
+  document.getElementById("btn4").innerText = content[lang].btn4;
+  document.getElementById("musicTitle").innerText = content[lang].musicTitle;
+  document.getElementById("musicText").innerText = content[lang].musicText;
+
+  document.querySelectorAll(".lang-switch button").forEach(btn => btn.classList.remove("active"));
+  document.getElementById(lang + "Btn").classList.add("active");
+}
+
+setLang('en');
+</script>
+
+</body>
+</html>
