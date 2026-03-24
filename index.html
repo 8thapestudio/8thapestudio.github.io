@@ -55,7 +55,7 @@ body {
 /* BUBBLE */
 .bg-image {
   position:absolute;
-  top:33%;
+  top:32%;
   left:50%;
   transform:translate(-50%, -50%);
   width:60vw;
@@ -64,7 +64,7 @@ body {
   animation: float 8s ease-in-out infinite;
   filter: drop-shadow(0 0 40px #00f0ff);
   transition:0.5s ease;
-  z-index:-1;
+  z-index:1;
   cursor:pointer;
 }
 
@@ -84,9 +84,10 @@ body {
 /* TAGLINE */
 .tagline {
   opacity:0;
-  transform:translateY(-30px);
+  transform:translateY(-40px);
   transition:0.5s ease;
-  font-size:1.1rem;
+  font-size:1.2rem;
+  margin-top:-5px;
 }
 
 /* BUTTONS */
@@ -110,34 +111,22 @@ body {
   box-shadow:0 0 25px #00f0ff;
 }
 
-/* === SHARED INTERACTION === */
+/* === ACTIVE STATE (triggered by JS) === */
 
-.hero:has(.bg-image:hover),
-.hero:has(.title:hover) {
-
-}
-
-/* tagline reveal */
-.hero:has(.bg-image:hover) .tagline,
-.hero:has(.title:hover) .tagline {
+.hero.active .tagline {
   opacity:1;
-  transform:translateY(0px);
+  transform:translateY(-5px);
 }
 
-/* buttons move */
-.hero:has(.bg-image:hover) .buttons,
-.hero:has(.title:hover) .buttons {
+.hero.active .buttons {
   transform:translateY(25px);
 }
 
-/* glow boost */
-.hero:has(.bg-image:hover) .title,
-.hero:has(.title:hover) .title {
+.hero.active .title {
   text-shadow:0 0 50px #00f0ff;
 }
 
-.hero:has(.bg-image:hover) .bg-image,
-.hero:has(.title:hover) .bg-image {
+.hero.active .bg-image {
   transform:translate(-50%, -55%) scale(1.06);
   filter: drop-shadow(0 0 90px #00f0ff);
 }
@@ -181,10 +170,9 @@ body {
   <button id="deBtn" onclick="setLang('de')">DE</button>
 </div>
 
-<div class="hero">
-  <img src="bg.png" class="bg-image">
-
-  <h1 class="title">8th Ape Studio</h1>
+<div class="hero" id="hero">
+  <img src="bg.png" class="bg-image" id="img">
+  <h1 class="title" id="title">8th Ape Studio</h1>
   <p id="tagline" class="tagline"></p>
 
   <div class="buttons">
@@ -227,6 +215,25 @@ body {
 </div>
 
 <script>
+const hero = document.getElementById("hero");
+const img = document.getElementById("img");
+const title = document.getElementById("title");
+
+function activate() {
+  hero.classList.add("active");
+}
+
+function deactivate() {
+  hero.classList.remove("active");
+}
+
+img.addEventListener("mouseenter", activate);
+img.addEventListener("mouseleave", deactivate);
+
+title.addEventListener("mouseenter", activate);
+title.addEventListener("mouseleave", deactivate);
+
+/* LANGUAGE */
 const content = {
   en: {
     tagline: "AI Music · Visual Experiments · Digital Identity",
