@@ -55,7 +55,7 @@ body {
 /* BUBBLE */
 .bg-image {
   position:absolute;
-  top:35%;
+  top:33%;
   left:50%;
   transform:translate(-50%, -50%);
   width:60vw;
@@ -63,33 +63,35 @@ body {
   opacity:0.9;
   animation: float 8s ease-in-out infinite;
   filter: drop-shadow(0 0 40px #00f0ff);
-  transition:0.4s;
+  transition:0.5s ease;
   z-index:-1;
+  cursor:pointer;
 }
 
 @keyframes float {
   0%,100% { transform:translate(-50%, -50%) scale(1); }
-  50% { transform:translate(-50%, -53%) scale(1.03); }
+  50% { transform:translate(-50%, -54%) scale(1.03); }
 }
 
 /* TITLE */
-h1 {
+.title {
   font-size:3.5rem;
   text-shadow:0 0 25px #00f0ff;
-  transition:0.4s;
+  transition:0.5s ease;
+  cursor:pointer;
 }
 
-/* TAGLINE (true hidden state) */
+/* TAGLINE */
 .tagline {
   opacity:0;
-  transform:translateY(-20px);
-  transition:0.4s ease;
-  margin-top:-10px;
+  transform:translateY(-30px);
+  transition:0.5s ease;
+  font-size:1.1rem;
 }
 
 /* BUTTONS */
 .buttons {
-  transition:0.4s ease;
+  transition:0.5s ease;
 }
 
 .btn {
@@ -108,23 +110,36 @@ h1 {
   box-shadow:0 0 25px #00f0ff;
 }
 
-/* === INTERACTION (FIXED) === */
+/* === SHARED INTERACTION === */
 
-.hero:hover .tagline {
+.hero:has(.bg-image:hover),
+.hero:has(.title:hover) {
+
+}
+
+/* tagline reveal */
+.hero:has(.bg-image:hover) .tagline,
+.hero:has(.title:hover) .tagline {
   opacity:1;
-  transform:translateY(10px);
+  transform:translateY(0px);
 }
 
-.hero:hover .buttons {
-  transform:translateY(15px);
+/* buttons move */
+.hero:has(.bg-image:hover) .buttons,
+.hero:has(.title:hover) .buttons {
+  transform:translateY(25px);
 }
 
-.hero:hover h1 {
-  text-shadow:0 0 40px #00f0ff;
+/* glow boost */
+.hero:has(.bg-image:hover) .title,
+.hero:has(.title:hover) .title {
+  text-shadow:0 0 50px #00f0ff;
 }
 
-.hero:hover .bg-image {
-  filter: drop-shadow(0 0 70px #00f0ff);
+.hero:has(.bg-image:hover) .bg-image,
+.hero:has(.title:hover) .bg-image {
+  transform:translate(-50%, -55%) scale(1.06);
+  filter: drop-shadow(0 0 90px #00f0ff);
 }
 
 /* SECTIONS */
@@ -169,7 +184,7 @@ h1 {
 <div class="hero">
   <img src="bg.png" class="bg-image">
 
-  <h1>8th Ape Studio</h1>
+  <h1 class="title">8th Ape Studio</h1>
   <p id="tagline" class="tagline"></p>
 
   <div class="buttons">
