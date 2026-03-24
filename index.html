@@ -131,7 +131,7 @@ body {
   padding:100px 20px;
 }
 
-/* MERCH GRID */
+/* MERCH */
 .merch-grid {
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -145,6 +145,23 @@ body {
   border:1px solid #00f0ff;
 }
 
+/* ABOVE */
+#above {
+  opacity:0.85;
+}
+
+#above h2 {
+  letter-spacing:4px;
+}
+
+#above p {
+  margin-top:20px;
+  font-size:1.2rem;
+  line-height:1.6;
+  white-space:pre-line;
+}
+
+/* FOOTER */
 .footer {
   padding:20px;
   opacity:0.5;
@@ -175,7 +192,8 @@ body {
     <a href="#music" class="btn" id="btn1"></a>
     <a href="#projects" class="btn" id="btn2"></a>
     <a href="#merch" class="btn" id="btn3"></a>
-    <a href="#contact" class="btn" id="btn4"></a>
+    <a href="#above" class="btn" id="btn4"></a>
+    <a href="#contact" class="btn" id="btn5"></a>
   </div>
 </div>
 
@@ -199,9 +217,15 @@ body {
   <div class="merch-grid">
     <div class="item"><img src="bg.png"><p>DROP_01</p></div>
     <div class="item"><img src="bg.png"><p>DROP_02</p></div>
-    <div class="item"><img src="bg.png"><p>DROP_03</p></div>
+    <div class="item"><img src="bg.png"><p>WATCH_01</p></div>
     <div class="item"><img src="bg.png"><p>DROP_04</p></div>
   </div>
+</div>
+
+<!-- ABOVE -->
+<div id="above" class="section">
+  <h2>ALL ABOVE</h2>
+  <p id="aboveText"></p>
 </div>
 
 <!-- CONTACT -->
@@ -245,12 +269,14 @@ const content = {
     btn1: "Listen",
     btn2: "Projects",
     btn3: "Merch",
-    btn4: "Contact",
+    btn4: "Above",
+    btn5: "Contact",
     musicTitle: "Music",
     musicText: "Latest releases coming soon",
     projTitle: "Projects",
     projText: "AI video · experimental visuals",
     merchText: "concept drops · coming soon",
+    aboveText: "This is not just merch.\nIt is a signal.\nEverything connects.",
     contactTitle: "Contact"
   },
   cz: {
@@ -258,12 +284,14 @@ const content = {
     btn1: "Hudba",
     btn2: "Projekty",
     btn3: "Merch",
-    btn4: "Kontakt",
+    btn4: "Above",
+    btn5: "Kontakt",
     musicTitle: "Hudba",
     musicText: "Nové skladby brzy",
     projTitle: "Projekty",
     projText: "AI video · vizuální tvorba",
     merchText: "koncept · brzy",
+    aboveText: "Tohle není jen merch.\nJe to signál.\nVšechno spolu souvisí.",
     contactTitle: "Kontakt"
   },
   de: {
@@ -271,12 +299,14 @@ const content = {
     btn1: "Musik",
     btn2: "Projekte",
     btn3: "Merch",
-    btn4: "Kontakt",
+    btn4: "Above",
+    btn5: "Kontakt",
     musicTitle: "Musik",
     musicText: "Neue Releases bald",
     projTitle: "Projekte",
     projText: "AI Video · visuelle Experimente",
     merchText: "Konzept · bald",
+    aboveText: "Das ist nicht nur Merch.\nEs ist ein Signal.\nAlles ist verbunden.",
     contactTitle: "Kontakt"
   },
   fr: {
@@ -284,12 +314,14 @@ const content = {
     btn1: "Écouter",
     btn2: "Projets",
     btn3: "Merch",
-    btn4: "Contact",
+    btn4: "Above",
+    btn5: "Contact",
     musicTitle: "Musique",
     musicText: "Nouvelles sorties bientôt",
     projTitle: "Projets",
     projText: "Vidéo IA · visuels expérimentaux",
     merchText: "drops concept · bientôt",
+    aboveText: "Ce n'est pas seulement du merch.\nC'est un signal.\nTout est connecté.",
     contactTitle: "Contact"
   },
   it: {
@@ -297,12 +329,14 @@ const content = {
     btn1: "Ascolta",
     btn2: "Progetti",
     btn3: "Merch",
-    btn4: "Contatto",
+    btn4: "Above",
+    btn5: "Contatto",
     musicTitle: "Musica",
     musicText: "Nuove uscite in arrivo",
     projTitle: "Progetti",
     projText: "Video AI · visivi sperimentali",
     merchText: "concept · presto",
+    aboveText: "Non è solo merch.\nÈ un segnale.\nTutto è connesso.",
     contactTitle: "Contatto"
   }
 };
@@ -313,11 +347,14 @@ function setLang(lang) {
   document.getElementById("btn2").innerText = content[lang].btn2;
   document.getElementById("btn3").innerText = content[lang].btn3;
   document.getElementById("btn4").innerText = content[lang].btn4;
+  document.getElementById("btn5").innerText = content[lang].btn5;
+
   document.getElementById("musicTitle").innerText = content[lang].musicTitle;
   document.getElementById("musicText").innerText = content[lang].musicText;
   document.getElementById("projTitle").innerText = content[lang].projTitle;
   document.getElementById("projText").innerText = content[lang].projText;
   document.getElementById("merchText").innerText = content[lang].merchText;
+  document.getElementById("aboveText").innerText = content[lang].aboveText;
   document.getElementById("contactTitle").innerText = content[lang].contactTitle;
 
   document.querySelectorAll(".lang-switch button").forEach(btn => btn.classList.remove("active"));
