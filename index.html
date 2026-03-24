@@ -63,6 +63,7 @@ body {
   opacity:0.9;
   animation: float 8s ease-in-out infinite;
   filter: drop-shadow(0 0 40px #00f0ff);
+  transition:0.4s;
   z-index:-1;
 }
 
@@ -75,9 +76,21 @@ body {
 h1 {
   font-size:3.5rem;
   text-shadow:0 0 25px #00f0ff;
+  transition:0.4s;
+}
+
+/* TAGLINE (hidden by default) */
+.tagline {
+  opacity:0;
+  transform:translateY(-10px);
+  transition:0.4s;
 }
 
 /* BUTTONS */
+.buttons {
+  transition:0.4s;
+}
+
 .btn {
   display:inline-block;
   margin:10px;
@@ -92,6 +105,24 @@ h1 {
   background:#00f0ff;
   color:black;
   box-shadow:0 0 25px #00f0ff;
+}
+
+/* HOVER INTERACTION */
+.hero:hover .tagline {
+  opacity:1;
+  transform:translateY(10px);
+}
+
+.hero:hover .buttons {
+  transform:translateY(10px);
+}
+
+.hero:hover h1 {
+  text-shadow:0 0 40px #00f0ff;
+}
+
+.hero:hover .bg-image {
+  filter: drop-shadow(0 0 60px #00f0ff);
 }
 
 /* SECTIONS */
@@ -137,9 +168,9 @@ h1 {
   <img src="bg.png" class="bg-image">
 
   <h1>8th Ape Studio</h1>
-  <p id="tagline"></p>
+  <p id="tagline" class="tagline"></p>
 
-  <div>
+  <div class="buttons">
     <a href="#music" class="btn" id="btn1"></a>
     <a href="#projects" class="btn" id="btn2"></a>
     <a href="#merch" class="btn" id="btn3"></a>
@@ -206,7 +237,7 @@ const content = {
     contactTitle: "Contact"
   },
   cz: {
-    tagline: "AI hudba · vizuální experimenty",
+    tagline: "AI hudba · vizuální experimenty · digitální identita",
     btn1: "Hudba",
     btn2: "Projekty",
     btn3: "Merch",
@@ -219,7 +250,7 @@ const content = {
     contactTitle: "Kontakt"
   },
   de: {
-    tagline: "AI Musik · visuelle Experimente",
+    tagline: "AI Musik · visuelle Experimente · digitale Identität",
     btn1: "Musik",
     btn2: "Projekte",
     btn3: "Merch",
