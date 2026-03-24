@@ -74,9 +74,10 @@ body {
 }
 
 /* TITLE */
-.title {
+.title span {
   font-size:3.5rem;
   text-shadow:0 0 25px #00f0ff;
+  display:inline-block;
   transition:0.5s ease;
   cursor:pointer;
 }
@@ -87,7 +88,6 @@ body {
   transform:translateY(-40px);
   transition:0.5s ease;
   font-size:1.2rem;
-  margin-top:-5px;
 }
 
 /* BUTTONS */
@@ -111,8 +111,7 @@ body {
   box-shadow:0 0 25px #00f0ff;
 }
 
-/* === ACTIVE STATE (triggered by JS) === */
-
+/* ACTIVE STATE */
 .hero.active .tagline {
   opacity:1;
   transform:translateY(-5px);
@@ -122,7 +121,7 @@ body {
   transform:translateY(25px);
 }
 
-.hero.active .title {
+.hero.active .title span {
   text-shadow:0 0 50px #00f0ff;
 }
 
@@ -172,7 +171,11 @@ body {
 
 <div class="hero" id="hero">
   <img src="bg.png" class="bg-image" id="img">
-  <h1 class="title" id="title">8th Ape Studio</h1>
+
+  <h1 class="title">
+    <span id="titleText">8th Ape Studio</span>
+  </h1>
+
   <p id="tagline" class="tagline"></p>
 
   <div class="buttons">
@@ -217,7 +220,7 @@ body {
 <script>
 const hero = document.getElementById("hero");
 const img = document.getElementById("img");
-const title = document.getElementById("title");
+const titleText = document.getElementById("titleText");
 
 function activate() {
   hero.classList.add("active");
@@ -230,8 +233,8 @@ function deactivate() {
 img.addEventListener("mouseenter", activate);
 img.addEventListener("mouseleave", deactivate);
 
-title.addEventListener("mouseenter", activate);
-title.addEventListener("mouseleave", deactivate);
+titleText.addEventListener("mouseenter", activate);
+titleText.addEventListener("mouseleave", deactivate);
 
 /* LANGUAGE */
 const content = {
