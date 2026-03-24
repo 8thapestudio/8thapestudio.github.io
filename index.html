@@ -150,7 +150,7 @@ body {
 
 <div class="hero" id="hero">
 
-  <img src="bg.png" class="bg-image">
+  <img src="bg.png" class="bg-image" id="img">
 
   <h1 class="title">
     <span id="titleText">8th Ape Studio</span>
@@ -177,16 +177,19 @@ body {
 <script>
 const hero = document.getElementById("hero");
 const titleText = document.getElementById("titleText");
+const img = document.getElementById("img");
 
 function isInsideReducedZone(e) {
   const rect = titleText.getBoundingClientRect();
+  const imgRect = img.getBoundingClientRect();
+
   const shrink = rect.width * 0.05;
 
   return (
     e.clientX > rect.left + shrink &&
     e.clientX < rect.right - shrink &&
-    e.clientY > rect.top - 200 && // rozšíření nahoru (bublina)
-    e.clientY < rect.bottom + 200 // dolů
+    e.clientY > imgRect.top &&   // 🔥 horní hranice = obrazek
+    e.clientY < rect.bottom + 200
   );
 }
 
