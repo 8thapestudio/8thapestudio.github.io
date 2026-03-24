@@ -52,18 +52,6 @@ body {
   padding-bottom:12vh;
 }
 
-/* === TRIGGER ZONE === */
-.trigger {
-  position:absolute;
-  top:20%;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:max-content;
-  padding:0 10px;
-  z-index:5;
-}
-
 /* BUBBLE */
 .bg-image {
   position:absolute;
@@ -85,9 +73,10 @@ body {
 }
 
 /* TITLE */
-.title {
+.title span {
   font-size:3.5rem;
   text-shadow:0 0 25px #00f0ff;
+  display:inline-block;
   transition:0.5s ease;
 }
 
@@ -120,14 +109,7 @@ body {
   box-shadow:0 0 25px #00f0ff;
 }
 
-/* === INTERACTION === */
-
-.trigger:hover ~ .title,
-.trigger:hover ~ .tagline,
-.trigger:hover ~ .buttons,
-.trigger:hover ~ .bg-image {
-}
-
+/* ACTIVE */
 .hero.active .tagline {
   opacity:1;
   transform:translateY(-5px);
@@ -137,7 +119,7 @@ body {
   transform:translateY(25px);
 }
 
-.hero.active .title {
+.hero.active .title span {
   text-shadow:0 0 50px #00f0ff;
 }
 
@@ -168,12 +150,12 @@ body {
 
 <div class="hero" id="hero">
 
-  <!-- TRIGGER ZONE -->
-  <div class="trigger" id="trigger"></div>
+  <img src="bg.png" class="bg-image" id="img">
 
-  <img src="bg.png" class="bg-image">
+  <h1 class="title">
+    <span id="titleText">8th Ape Studio</span>
+  </h1>
 
-  <h1 class="title">8th Ape Studio</h1>
   <p id="tagline" class="tagline"></p>
 
   <div class="buttons">
@@ -182,7 +164,6 @@ body {
     <a href="#merch" class="btn" id="btn3"></a>
     <a href="#contact" class="btn" id="btn4"></a>
   </div>
-
 </div>
 
 <div class="section" id="music">
@@ -194,10 +175,31 @@ body {
 
 <script>
 const hero = document.getElementById("hero");
-const trigger = document.getElementById("trigger");
+const img = document.getElementById("img");
+const titleText = document.getElementById("titleText");
 
-trigger.addEventListener("mouseenter", () => hero.classList.add("active"));
-trigger.addEventListener("mouseleave", () => hero.classList.remove("active"));
+function isInsideReducedZone(e) {
+  const rect = titleText.getBoundingClientRect();
+  const shrink = rect.width * 0.05; // 5% zleva i zprava
+
+  return (
+    e.clientX > rect.left + shrink &&
+    e.clientX < rect.right - shrink
+  );
+}
+
+function activate(e) {
+  if (isInsideReducedZone(e)) {
+    hero.classList.add("active");
+  }
+}
+
+function deactivate() {
+  hero.classList.remove("active");
+}
+
+document.addEventListener("mousemove", activate);
+document.addEventListener("mouseleave", deactivate);
 
 /* LANGUAGE */
 const content = {
